@@ -1,0 +1,37 @@
+# Bytecode
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Virtual environment used in this workspace
+.venv/
+
+# Test caches and coverage (repo contains tests)
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# IDE/editor
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Jupyter checkpoints (if any notebooks are added later)
+.ipynb_checkpoints/
+
+# Package metadata
+*.egg-info/
+
+# Repo-specific: ignore tests folder and dev requirements inside GazeTracking
+GazeTracking/tests/
+GazeTracking/requirements-dev.txt
+
+
