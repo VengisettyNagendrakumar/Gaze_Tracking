@@ -42,7 +42,7 @@ class GazeTracker:
         self._frame_count += 1
         gaze = estimate_gaze(frame_bgr)
 
-        # ── Holdover logic ────────────────────────────────────
+        # Holdover logic 
         # Single no_face frame = MediaPipe blip → skip silently.
         # Multiple consecutive no_face = real absence → update last_gaze
         # so the display also shows no_face (not stale "focused").

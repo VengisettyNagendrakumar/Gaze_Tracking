@@ -41,7 +41,7 @@ from config import (
 
 logger = logging.getLogger(__name__)
 
-# ── Landmark indices ──────────────────────────────────────────
+# Landmark indices 
 # Nose
 _NOSE_TIP      = 1
 _NOSE_BASE     = 168   # between eyes (glabella)
@@ -89,7 +89,7 @@ class GazeResult:
     landmarks_2d:  Optional[np.ndarray] = None
 
 
-# ── Calibrator ────────────────────────────────────────────────
+# Calibrator 
 
 class GazeCalibrator:
     """Captures neutral pose baseline so deviations are measured correctly."""
@@ -123,7 +123,7 @@ class GazeCalibrator:
         return f"{len(self._yaw_s)}/{CALIBRATION_FRAMES}"
 
 
-# ── Main estimation function ──────────────────────────────────
+# Main estimation function 
 
 def estimate_gaze(frame_bgr: np.ndarray,
                   calibrator: Optional[GazeCalibrator] = None) -> GazeResult:
@@ -134,7 +134,7 @@ def estimate_gaze(frame_bgr: np.ndarray,
     if frame_bgr is None or frame_bgr.size == 0:
         return _no_face()
 
-    # ── Quick skin-tone check ─────────────────────────────────
+    #  Quick skin-tone check 
     # If no skin-colored pixels exist in the frame, there's no face.
     # This catches "completely empty frame" cases instantly without
     # running MediaPipe at all.
@@ -165,7 +165,7 @@ def estimate_gaze(frame_bgr: np.ndarray,
     lms = results.multi_face_landmarks[0].landmark
     pts = np.array([[lm.x * w, lm.y * h] for lm in lms], dtype=np.float64)
 
-    # ── Compute yaw from nose-to-eye asymmetry ────────────────
+    # Compute yaw from nose-to-eye asymmetry 
     # When head turns RIGHT: nose moves toward LEFT eye
     #   → dist(nose, left_eye) < dist(nose, right_eye)
     # Ratio = (right_dist - left_dist) / (right_dist + left_dist)
@@ -179,7 +179,7 @@ def estimate_gaze(frame_bgr: np.ndarray,
     total  = dist_l + dist_r
     yaw    = (dist_r - dist_l) / total if total > 0 else 0.0
 
-    # ── Compute pitch from nose vertical position ─────────────
+    #Compute pitch from nose vertical position 
     # Nose tip Y relative to the midpoint between forehead and chin
     # When head tilts DOWN: nose tip moves below midpoint → positive pitch
     # When head tilts UP:   nose tip moves above midpoint → negative pitch
@@ -195,19 +195,19 @@ def estimate_gaze(frame_bgr: np.ndarray,
     else:
         pitch = 0.0
 
-    # ── Calibration ───────────────────────────────────────────
+    # Calibration 
     yaw_adj, pitch_adj = yaw, pitch
     if calibrator is not None:
         if not calibrator.calibrated:
             calibrator.add_sample(yaw, pitch)
         yaw_adj, pitch_adj = calibrator.adjust(yaw, pitch)
 
-    # ── Iris ratios ───────────────────────────────────────────
+    # Iris ratios 
     has_iris = len(pts) >= 478
     iris_v   = _iris_vertical(pts)   if has_iris else None
     iris_h   = _iris_horizontal(pts) if has_iris else None
 
-    # ── Classify ──────────────────────────────────────────────
+    # Classify 
     state = _classify(yaw_adj, pitch_adj, iris_v, iris_h)
 
     logger.info(
@@ -228,7 +228,7 @@ def estimate_gaze(frame_bgr: np.ndarray,
     )
 
 
-# ── Classification ────────────────────────────────────────────
+# Classification 
 # Thresholds are now RATIOS (0.0 to 1.0), not degrees.
 # Update config.py thresholds accordingly (see below).
 
@@ -282,7 +282,7 @@ def _classify(yaw: float, pitch: float,
     return STATE_FOCUSED
 
 
-# ── Iris helpers ──────────────────────────────────────────────
+# Iris helpers 
 
 def _iris_vertical(pts: np.ndarray) -> Optional[float]:
     try:
