@@ -1,0 +1,43 @@
+# Audio Monitoring dependencies
+#
+# INSTALL ORDER (Windows — no C++ compiler needed):
+#   pip install webrtcvad-wheels
+#   pip install resemblyzer --no-deps
+#   pip install -r requirements.txt
+
+torch>=2.0.0
+torchaudio>=2.0.0
+pyaudio>=0.2.13
+numpy>=1.24.0
+webrtcvad-wheels        # pre-built webrtcvad — must install BEFORE resemblyzer
+# resemblyzer           # install separately: pip install resemblyzer --no-deps
+librosa>=0.9.1          # resemblyzer dependency
+scipy>=1.9.0            # resemblyzer dependency
+umap-learn>=0.5.0       # resemblyzer dependency
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Audio Monitoring — AWS Linux Deployment
+# Run: pip install -r requirements.txt
+
+# torch>=2.0.0
+# torchaudio>=2.0.0
+# pyaudio>=0.2.13
+# numpy>=1.24.0
+# webrtcvad>=2.0.10
+# resemblyzer>=0.1.1
+# librosa>=0.9.1
+# scipy>=1.9.0
+# umap-learn>=0.5.0
+# pytest>=8.0.0

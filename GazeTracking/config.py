@@ -10,9 +10,9 @@ REFINE_LANDMARKS     = True
 
 #Calibration 
 # Number of frames collected at exam start while student looks at screen.
-# At 2 FPS = 5 frames = ~2.5 seconds.
+# At 2 FPS = 5 frames = 2.5 seconds.
 # During this time the student must look straight at the camera/screen.
-CALIBRATION_FRAMES = 10   # ~5 seconds at 2 FPS
+CALIBRATION_FRAMES = 10   # 5 seconds at 2 FPS
 
 # Head pose thresholds (degrees) 
 # These are RELATIVE to the student's calibrated neutral position.
@@ -48,14 +48,14 @@ STATE_NO_FACE       = "no_face"
 STATE_CALIBRATING   = "calibrating"
 
 # Sustained thresholds 
-CONSECUTIVE_AWAY_FRAMES  = 4    # ~2 sec at 2 FPS before sustained event
-NO_FACE_SUSTAINED_FRAMES = 6    # ~3 sec of missing face before event
+CONSECUTIVE_AWAY_FRAMES  = 4    # 2 sec at 2 FPS before sustained event
+NO_FACE_SUSTAINED_FRAMES = 6    # 3 sec of missing face before event
 ESCALATION_COUNT         = 3
-ESCALATION_WINDOW_FRAMES = 60   # ~30 sec
+ESCALATION_WINDOW_FRAMES = 60   # 30 sec
 
 # Pupil deviation must persist N frames before emitting event
 # (prevents single-frame eye blinks/glances triggering events)
-PUPIL_SUSTAINED_FRAMES = 3      # ~1.5 sec of sustained pupil shift
+PUPIL_SUSTAINED_FRAMES = 3      # 1.5 sec of sustained pupil shift
 
 #  Risk scores 
 #Tune with Risk Engine teammate. Weight = attention_risk × 0.10

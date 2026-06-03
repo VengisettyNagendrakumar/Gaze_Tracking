@@ -51,7 +51,7 @@ def run(source=0, show_window=True):
 
         now = time.time()
 
-        # ── 2 FPS processing ──────────────────────────────────
+        # 2 FPS processing 
         if now - last_time >= INTERVAL:
             last_time = now
             event = tracker.process_frame(frame)
@@ -73,7 +73,7 @@ def run(source=0, show_window=True):
                         g.state, g.yaw, g.pitch, iv, ih,
                     )
 
-        # ── Display every frame (smooth window) ───────────────
+        # Display every frame (smooth window) 
         if show_window:
             display = frame.copy()
 
@@ -126,7 +126,7 @@ def run(source=0, show_window=True):
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-    # ── Cleanup ───────────────────────────────────────────────
+    # Cleanup 
     cap.release()
     if show_window:
         cv2.destroyAllWindows()

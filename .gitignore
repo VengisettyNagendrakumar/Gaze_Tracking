@@ -35,3 +35,5 @@ GazeTracking/tests/
 GazeTracking/requirements-dev.txt
 
 
+Audio_monitoring/tests/
+Audio_monitoring/requirements-dev.txt
